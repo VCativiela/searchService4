@@ -1,5 +1,7 @@
-package com.example.searchservice4;
+package com.example.searchservice4.service;
 
+import com.example.searchservice4.model.Message;
+import com.example.searchservice4.repository.MessageRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,23 +16,24 @@ import java.util.List;
 
 @Service
 public class SearchService {
-    private final MessageRepository messageRepository;
+
+    //@Autowired
+    private MessageRepository messageRepository;
 
     public SearchService(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
     }
 
+    public List<Message> getMessages() {
+        return messageRepository.findAll();
+    }
+
     public List<Message> searchByHashtag(String hashtagToSearch) {
+        //messageRepository.searchAllByHashtag(hashtagToSearch);
         return null;
     }
 
     public List<Message> searchByText(String textToSearch) {
-        return messageRepository.findByContentContaining(textToSearch);
-
+        return messageRepository.searchAllByContent(textToSearch);
     }
-
-
-
-
-
 }
